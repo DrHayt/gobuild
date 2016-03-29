@@ -1,8 +1,8 @@
 {
     "application": {
         "name": "Application Name",
-        "lastbuilt": "2016-03-29T16:08:38Z",
-        "assets": true,
+        "lastbuilt": "2016-03-29T17:49:41Z",
+        "assets": false,
         "godep": true
     },
     "assets": [
