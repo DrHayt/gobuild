@@ -13,7 +13,7 @@ func validateGoVersion() error {
 	msg.Action(fmt.Sprintf("Is required version(%s) of go installed", appConfig.Versions.Go), ".")
 	if !versionCheck(appConfig.Versions.Go, getGoVersion()) {
 		msg.StatOut(*msg.ColHiRed, msg.TxtNo, ".", true)
-		return fmt.Errorf("The version of go (%s) on this machine dose not meat the requirements (%s)", getGoVersion(), appConfig.Versions.Go)
+		return fmt.Errorf("The version of go (%s) on this machine does not meet the requirements (%s)", getGoVersion(), appConfig.Versions.Go)
 	}
 	msg.StatOut(*msg.ColHiGreen, msg.TxtYes, ".", true)
 	return nil
@@ -23,7 +23,7 @@ func validateGoBindVersion() error {
 	msg.Action(fmt.Sprintf("Is required version(%s) of go-bindata installed", appConfig.Versions.GoBind), ".")
 	if !versionCheck(appConfig.Versions.GoBind, getBindDataVersion()) {
 		msg.StatOut(*msg.ColHiRed, msg.TxtNo, ".", true)
-		return fmt.Errorf("The version of go-bindata (%s) on this machine dose not meat the requirements (%s)", getBindDataVersion(), appConfig.Versions.GoBind)
+		return fmt.Errorf("The version of go-bindata (%s) on this machine does not meet the requirements (%s)", getBindDataVersion(), appConfig.Versions.GoBind)
 	}
 	msg.StatOut(*msg.ColHiGreen, msg.TxtYes, ".", true)
 	return nil
@@ -33,7 +33,7 @@ func validateGoDepVersion() error {
 	msg.Action(fmt.Sprintf("Is required version(%s) of godep installed", appConfig.Versions.GoDep), ".")
 	if !versionCheck(appConfig.Versions.GoDep, getGoDepVersion()) {
 		msg.StatOut(*msg.ColHiRed, msg.TxtNo, ".", true)
-		return fmt.Errorf("The version of godep (%s) on this machine dose not meat the requirements (%s)", getGoDepVersion(), appConfig.Versions.GoDep)
+		return fmt.Errorf("The version of godep (%s) on this machine does not meet the requirements (%s)", getGoDepVersion(), appConfig.Versions.GoDep)
 	}
 	msg.StatOut(*msg.ColHiGreen, msg.TxtYes, ".", true)
 	return nil
