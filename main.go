@@ -9,25 +9,35 @@ import (
 
 const (
 	// PathConfig is the location from the app of the config file
-	PathConfig = "./gobuild.json"
+	PathConfig   = "./gobuild.json"
+	PathAssets   = "./assets"
+	PathPackages = "./packages"
 )
 
 var (
-	appConfig   = conf.Data{}
-	flagNoColor = false
-	pathBuild   = true
+	appConfig     = conf.Data{}
+	flagNoColor   = false
+	pathBuild     = true
+	buildRunTest  bool
+	buildSkipCovr bool
 )
 
 func init() {
 	var err error
 
 	// Sett values from argumrnts
+	flag.BoolVar(&buildRunTest, "t", false, "Run Test for each package")
+	flag.BoolVar(&buildSkipCovr, "c", false, "Dont error when coverage dose not match")
 	flag.BoolVar(&flagNoColor, "no-color", false, "disable color in display")
 	flag.Parse()
 
 	// Load Config
 	err = appConfig.Load(PathConfig)
 	msg.ErrorMsg(err, 1)
+
+	if flagNoColor {
+		msg.SetNoColor()
+	}
 }
 
 func main() {
@@ -39,13 +49,24 @@ func main() {
 
 	// Verify System
 	msg.SectionHeader("Verify System")
+
 	err := validateGoVersion()
 	msg.ErrorMsg(err, 2)
+
+	if appConfig.Application.Assets {
+		err := validateGoBindVersion()
+		msg.ErrorMsg(err, 2)
+	}
+
+	if appConfig.Application.GoDep {
+		err := validateGoDepVersion()
+		msg.ErrorMsg(err, 2)
+	}
 
 	// Direct to the path to take
 	switch true {
 	case pathBuild:
-
+		actionBuild(appConfig)
 	}
 
 }

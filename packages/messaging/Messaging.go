@@ -31,6 +31,11 @@ var (
 	TxtError   = "Error"
 )
 
+// SetNoColor turns color off
+func SetNoColor() {
+	color.NoColor = true
+}
+
 // SectionHeader will print the section splitter
 func SectionHeader(title string) {
 	boxClr := color.New(color.FgHiBlue).SprintFunc()
@@ -51,6 +56,28 @@ func KeyVal(key, val string) {
 // Action will print the description
 func Action(act, padc string) {
 	fmt.Print(padRight(fmt.Sprint(act, " "), ".", ScreenWidth-StatMsgSize))
+}
+
+// Col4Bar will print a table header with 4 columns
+func Col4Bar(col1, col2, col3, col4 string) {
+
+	txtCol := color.New(color.FgHiMagenta).SprintFunc()
+
+	col1pat := padRight("-[%s]-", "-", (ScreenWidth+2)-(len(col1)+(StatMsgSize*3)))
+	col2pat := padLeft("-[%s]-", "-", (StatMsgSize+2)-len(col2))
+	col3pat := padLeft("-[%s]-", "-", (StatMsgSize+2)-len(col3))
+	col4pat := padLeft("-[%s]-", "-", (StatMsgSize+2)-len(col4))
+
+	fmt.Printf("%s%s%s%s\n",
+		fmt.Sprintf(col1pat, txtCol(col1)),
+		fmt.Sprintf(col2pat, txtCol(col2)),
+		fmt.Sprintf(col3pat, txtCol(col3)),
+		fmt.Sprintf(col4pat, txtCol(col4)))
+}
+
+// Col4Text print the first column of the table row
+func Col4Text(msgTxt string) {
+	fmt.Print(padRight(fmt.Sprint(msgTxt, " "), " ", ScreenWidth-(StatMsgSize*3)))
 }
 
 // ErrorMsg Will print a standardized msg with ERROR and exit if code provided

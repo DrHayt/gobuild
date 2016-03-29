@@ -18,8 +18,38 @@ func validateGoVersion() error {
 	return nil
 }
 
+func validateGoBindVersion() error {
+	msg.Action(fmt.Sprintf("Is required version(%s) of go-bindata installed", appConfig.Versions.GoBind), ".")
+	if !versionCheck(appConfig.Versions.GoBind, getBindDataVersion()) {
+		msg.StatOut(*msg.ColHiRed, msg.TxtNo, ".", true)
+		return fmt.Errorf("The version of go-bindata (%s) on this machine dose not meat the requirements (%s)", getBindDataVersion(), appConfig.Versions.GoBind)
+	}
+	msg.StatOut(*msg.ColHiGreen, msg.TxtYes, ".", true)
+	return nil
+}
+
+func validateGoDepVersion() error {
+	msg.Action(fmt.Sprintf("Is required version(%s) of godep installed", appConfig.Versions.GoDep), ".")
+	if !versionCheck(appConfig.Versions.GoDep, getGoDepVersion()) {
+		msg.StatOut(*msg.ColHiRed, msg.TxtNo, ".", true)
+		return fmt.Errorf("The version of godep (%s) on this machine dose not meat the requirements (%s)", getGoDepVersion(), appConfig.Versions.GoDep)
+	}
+	msg.StatOut(*msg.ColHiGreen, msg.TxtYes, ".", true)
+	return nil
+}
+
 func getGoVersion() string {
 	ver, _ := pullVersion([]string{"go", "version"}, "version go")
+	return ver
+}
+
+func getBindDataVersion() string {
+	ver, _ := pullVersion([]string{"go-bindata", "-version"}, "go-bindata ")
+	return ver
+}
+
+func getGoDepVersion() string {
+	ver, _ := pullVersion([]string{"godep", "version"}, " v")
 	return ver
 }
 
