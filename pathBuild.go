@@ -138,8 +138,10 @@ func actionBuild(config conf.Data) error {
 		}
 		msg.StatOut(*msg.ColHiGreen, msg.TxtSuccess, ".", true)
 
-		t := time.Now().UTC()
-		appConfig.Application.LastBuild = fmt.Sprint(t.Format(time.RFC3339))
+		if buildSetTime {
+			t := time.Now().UTC()
+			appConfig.Application.LastBuild = fmt.Sprint(t.Format(time.RFC3339))
+		}
 
 		msg.Action("Save Config", ".")
 		err = appConfig.Save(PathConfig)

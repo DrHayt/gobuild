@@ -20,6 +20,7 @@ var (
 	pathBuild     = true
 	buildRunTest  bool
 	buildSkipCovr bool
+	buildSetTime  bool
 )
 
 func init() {
@@ -28,6 +29,7 @@ func init() {
 	// Sett values from argumrnts
 	flag.BoolVar(&buildRunTest, "t", false, "Run Test for each package")
 	flag.BoolVar(&buildSkipCovr, "c", false, "Dont error when coverage dose not match")
+	flag.BoolVar(&buildSetTime, "set-time", false, "Pass to update the last build time")
 	flag.BoolVar(&flagNoColor, "no-color", false, "disable color in display")
 	flag.Parse()
 
