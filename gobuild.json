@@ -1,0 +1,9 @@
+{
+  "application": {
+    "name": "Application Name",
+    "lastbuilt": ""
+  },
+  "versions": {
+    "go": "1.5.3"
+  }
+}
