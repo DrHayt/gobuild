@@ -1,0 +1,129 @@
+{
+    "application": {
+        "name": "Application Name",
+        "lastbuilt": "2016-03-29T17:49:41Z",
+        "assets": false,
+        "godep": true
+    },
+    "assets": [
+        {
+            "Path": "assets/assets.go",
+            "Md5": "ddea88cdc7cb33e8b024301e21bec415"
+        },
+        {
+            "Path": "assets/fonts/fontawesome-webfont.woff2",
+            "Md5": "db812d8a70a4e88e888744c1c9a27e89"
+        },
+        {
+            "Path": "assets/templates/head.gtpl",
+            "Md5": "f29fda65ee01d900222cb9c2236258bd"
+        },
+        {
+            "Path": "assets/templates/pageHome.gtpl",
+            "Md5": "ec08f82e24084515efcd5805d66b15ed"
+        },
+        {
+            "Path": "assets/templates/topMenu.gtpl",
+            "Md5": "292b4d74b9a2b9a61b24365b55af5a0d"
+        },
+        {
+            "Path": "assets/css/bootstrap.min.css",
+            "Md5": "2f624089c65f12185e79925bc5a7fc42"
+        },
+        {
+            "Path": "assets/fonts/FontAwesome.otf",
+            "Md5": "87d8ca3ddc57e7d2da6226e480f90457"
+        },
+        {
+            "Path": "assets/fonts/glyphicons-halflings-regular.ttf",
+            "Md5": "e18bbf611f2a2e43afc071aa2f4e1512"
+        },
+        {
+            "Path": "assets/templates/footer.gtpl",
+            "Md5": "ef0f35c51f59719ab00877c502a4fbc0"
+        },
+        {
+            "Path": "assets/templates/pageClose.gtpl",
+            "Md5": "4bf36f442585a94329f3821410cff8f9"
+        },
+        {
+            "Path": "assets/fonts/fontawesome-webfont.woff",
+            "Md5": "a35720c2fed2c7f043bc7e4ffb45e073"
+        },
+        {
+            "Path": "assets/templates/pageSeedDelete.gtpl",
+            "Md5": "3e252521c7149af8f561445949120f10"
+        },
+        {
+            "Path": "assets/fonts/fontawesome-webfont.svg",
+            "Md5": "f775f9cca88e21d45bebe185b27c0e5b"
+        },
+        {
+            "Path": "assets/css/font-awesome.min.css",
+            "Md5": "4fbd15cb6047af93373f4f895639c8bf"
+        },
+        {
+            "Path": "assets/fonts/fontawesome-webfont.ttf",
+            "Md5": "a3de2170e4e9df77161ea5d3f31b2668"
+        },
+        {
+            "Path": "assets/templates/index.php",
+            "Md5": "00358c277d12196e2caa6d422029d51a"
+        },
+        {
+            "Path": "assets/fonts/glyphicons-halflings-regular.eot",
+            "Md5": "f4769f9bdb7466be65088239c12046d1"
+        },
+        {
+            "Path": "assets/fonts/glyphicons-halflings-regular.svg",
+            "Md5": "89889688147bd7575d6327160d64e760"
+        },
+        {
+            "Path": "assets/templates/pageWalletInfo.gtpl",
+            "Md5": "5b79c84e422945ef11aa453db9f73d7e"
+        },
+        {
+            "Path": "assets/fonts/glyphicons-halflings-regular.woff2",
+            "Md5": "448c34a56d699c29117adc64c43affeb"
+        },
+        {
+            "Path": "assets/templates/pageSeed.gtpl",
+            "Md5": "67a53555a709ecc32ee1ce2342e27172"
+        },
+        {
+            "Path": "assets/fonts/fontawesome-webfont.eot",
+            "Md5": "32400f4e08932a94d8bfd2422702c446"
+        },
+        {
+            "Path": "assets/fonts/glyphicons-halflings-regular.woff",
+            "Md5": "fa2772327f55d8198301fdb8bcfc8158"
+        },
+        {
+            "Path": "assets/templates/errorCell.gtpl",
+            "Md5": "19b4a66b05a06a786ed254a86cccade3"
+        },
+        {
+            "Path": "assets/templates/successCell.gtpl",
+            "Md5": "b4c45f1ab1407220bf55b349f012aae6"
+        },
+        {
+            "Path": "assets/assets_test.go",
+            "Md5": "7595ce760c69ff83d55fb77bb9e0e8ee"
+        },
+        {
+            "Path": "assets/misc/fave.ico",
+            "Md5": "66ad439ff5a24c634d2192b9b2117429"
+        }
+    ],
+    "packages": [
+        {
+            "name": "packages/configuration",
+            "coverage": 66.7
+        }
+    ],
+    "versions": {
+        "go": "1.5.3",
+        "go-bind": "3.1.0",
+        "godep": "53"
+    }
+}
