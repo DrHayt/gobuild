@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os/exec"
+	"strconv"
 	"strings"
 
 	msg "github.com/CrowBits/gobuild/packages/messaging"
@@ -53,23 +54,39 @@ func getGoDepVersion() string {
 	return ver
 }
 
-func versionCheck(baseVer, testVer string) bool {
-	// Split version strins
-	baseDat := strings.Split(baseVer, ".")
-	testDat := strings.Split(testVer, ".")
-
-	// Length must match
-	if len(baseDat) != len(testDat) {
-		return false
+func versionCheck(a, b string) bool {
+	var ret int
+	as := strings.Split(a, ".")
+	bs := strings.Split(b, ".")
+	loopMax := len(bs)
+	if len(as) > len(bs) {
+		loopMax = len(as)
 	}
-
-	// Check if newer
-	for idx, val := range baseDat {
-		if val > testDat[idx] {
-			return false
+	for i := 0; i < loopMax; i++ {
+		var x, y string
+		if len(as) > i {
+			x = as[i]
+		}
+		if len(bs) > i {
+			y = bs[i]
+		}
+		xi, _ := strconv.Atoi(x)
+		yi, _ := strconv.Atoi(y)
+		if xi > yi {
+			ret = -1
+		} else if xi < yi {
+			ret = 1
+		}
+		if ret != 0 {
+			break
 		}
 	}
+
+	if ret < 0 {
+		return false
+	}
 	return true
+
 }
 
 func pullVersion(cmd []string, parsStr string) (string, error) {

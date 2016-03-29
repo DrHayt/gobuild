@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/fatih/color"
+	"github.com/CrowBits/gobuild/Godeps/_workspace/src/github.com/fatih/color"
 )
 
 // Print Size Satandards

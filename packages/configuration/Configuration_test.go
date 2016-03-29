@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/CrowBits/gobuild/Godeps/_workspace/src/github.com/stretchr/testify/assert"
 )
 
 const tstJSONSuccess = "{\"application\":{\"name\":\"TestAppName\",\"lastbuilt\":\"00/00/00\"},\"versions\":{\"go\":\"1.1.1\"}}"

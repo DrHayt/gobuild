@@ -53,7 +53,7 @@ func actionBuild(config conf.Data) error {
 	if config.Application.GoDep {
 		msg.SectionHeader("GoDep .. Update Import Paths")
 		msg.Action("Run GoDep on Project", ".")
-		out, err := exec.Command("godep", "save", "./...").Output()
+		out, err := exec.Command("godep", "save", "-r", "./...").Output()
 		if err != nil {
 			msg.StatOut(*msg.ColHiRed, msg.TxtFail, ".", true)
 
