@@ -138,7 +138,7 @@ func actionBuild(config conf.Data) error {
 		}
 		msg.StatOut(*msg.ColHiGreen, msg.TxtSuccess, ".", true)
 
-		if buildSetTime {
+		if !buildSkipTime {
 			t := time.Now().UTC()
 			appConfig.Application.LastBuild = fmt.Sprint(t.Format(time.RFC3339))
 		}
