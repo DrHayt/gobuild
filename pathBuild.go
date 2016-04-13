@@ -75,81 +75,80 @@ func actionBuild(config conf.Data) error {
 		msg.StatOut(*msg.ColHiYellow, msg.TxtNo, ".", true)
 	} else {
 		msg.StatOut(*msg.ColHiGreen, msg.TxtYes, ".", true)
+	}
+	var packError error
 
-		var packError error
+	fmt.Println("")
+	msg.Col4Bar("Package", "Install", "Test", "Cover")
 
-		fmt.Println("")
-		msg.Col4Bar("Package", "Install", "Test", "Cover")
+	for packName, _ := range myPack.TestList {
 
-		for packName, _ := range myPack.TestList {
-
-			dispName := strings.TrimSpace(packName)
-			if dispName == "" {
-				dispName = "main"
-			}
-			msg.Col4Text(dispName)
-
-			stInstall, stTest, stCov, Prcnt := myPack.ProcessPackage(packName, buildRunTest)
-
-			// Display Install Stat
-			switch stInstall {
-			case pac.StatInstallSuccess:
-				msg.StatOut(*msg.ColHiGreen, msg.TxtSuccess, " ", false)
-			case pac.StatInstallFail:
-				packError = fmt.Errorf("Error Installing package %s", packName)
-				msg.StatOut(*msg.ColHiRed, msg.TxtFail, " ", false)
-			}
-
-			// Display Text Stat
-			switch stTest {
-			case pac.StatPassedTest:
-				msg.StatOut(*msg.ColHiGreen, msg.TxtSuccess, " ", false)
-			case pac.StatFailedTest:
-				packError = fmt.Errorf("Error Testing package %s", packName)
-				msg.StatOut(*msg.ColHiGreen, "WHAA", " ", false)
-			case pac.StatTestNotRan:
-				msg.StatOut(*msg.ColHiYellow, "NotRan", " ", false)
-			case pac.StatNoTestFile:
-				msg.StatOut(*msg.ColHiCyan, "NoTest", " ", false)
-			}
-
-			// Display Cover Stat
-			switch stCov {
-			case pac.StatInstallSuccess:
-				msg.StatOut(*msg.ColHiGreen, fmt.Sprint(Prcnt), " ", true)
-			case pac.StatTestNotRan:
-				msg.StatOut(*msg.ColHiYellow, "NotRan", " ", true)
-			case pac.StatFailedTest:
-				if !buildSkipCovr {
-					packError = fmt.Errorf("Error with coverage on package %s", packName)
-				}
-				msg.StatOut(*msg.ColHiRed, fmt.Sprint(Prcnt), " ", true)
-			}
-
+		dispName := strings.TrimSpace(packName)
+		if dispName == "" {
+			dispName = "main"
 		}
-		msg.ErrorMsg(packError, 99)
+		msg.Col4Text(dispName)
 
-		msg.SectionHeader("Finish Up")
-		msg.Action("Install main application", ".")
-		_, err = myPack.InstallPackage("")
-		if err != nil {
-			msg.StatOut(*msg.ColHiRed, msg.TxtFail, ".", true)
-			msg.ErrorMsg(err, 2)
+		stInstall, stTest, stCov, Prcnt := myPack.ProcessPackage(packName, buildRunTest)
+
+		// Display Install Stat
+		switch stInstall {
+		case pac.StatInstallSuccess:
+			msg.StatOut(*msg.ColHiGreen, msg.TxtSuccess, " ", false)
+		case pac.StatInstallFail:
+			packError = fmt.Errorf("Error Installing package %s", packName)
+			msg.StatOut(*msg.ColHiRed, msg.TxtFail, " ", false)
 		}
+
+		// Display Text Stat
+		switch stTest {
+		case pac.StatPassedTest:
+			msg.StatOut(*msg.ColHiGreen, msg.TxtSuccess, " ", false)
+		case pac.StatFailedTest:
+			packError = fmt.Errorf("Error Testing package %s", packName)
+			msg.StatOut(*msg.ColHiGreen, "WHAA", " ", false)
+		case pac.StatTestNotRan:
+			msg.StatOut(*msg.ColHiYellow, "NotRan", " ", false)
+		case pac.StatNoTestFile:
+			msg.StatOut(*msg.ColHiCyan, "NoTest", " ", false)
+		}
+
+		// Display Cover Stat
+		switch stCov {
+		case pac.StatInstallSuccess:
+			msg.StatOut(*msg.ColHiGreen, fmt.Sprint(Prcnt), " ", true)
+		case pac.StatTestNotRan:
+			msg.StatOut(*msg.ColHiYellow, "NotRan", " ", true)
+		case pac.StatFailedTest:
+			if !buildSkipCovr {
+				packError = fmt.Errorf("Error with coverage on package %s", packName)
+			}
+			msg.StatOut(*msg.ColHiRed, fmt.Sprint(Prcnt), " ", true)
+		}
+
+	}
+	msg.ErrorMsg(packError, 99)
+
+	msg.SectionHeader("Finish Up")
+	msg.Action("Install main application", ".")
+	_, err := myPack.InstallPackage("")
+	if err != nil {
+		msg.StatOut(*msg.ColHiRed, msg.TxtFail, ".", true)
+		msg.ErrorMsg(err, 2)
+	}
+	msg.StatOut(*msg.ColHiGreen, msg.TxtSuccess, ".", true)
+
+	if !buildSkipTime {
+		t := time.Now().UTC()
+		appConfig.Application.LastBuild = fmt.Sprint(t.Format(time.RFC3339))
+	}
+
+	msg.Action("Save Config", ".")
+	err = appConfig.Save(PathConfig)
+	if err != nil {
+		msg.StatOut(*msg.ColHiRed, msg.TxtFail, ".", true)
+	} else {
 		msg.StatOut(*msg.ColHiGreen, msg.TxtSuccess, ".", true)
-
-		if !buildSkipTime {
-			t := time.Now().UTC()
-			appConfig.Application.LastBuild = fmt.Sprint(t.Format(time.RFC3339))
-		}
-
-		msg.Action("Save Config", ".")
-		err = appConfig.Save(PathConfig)
-		if err != nil {
-			msg.StatOut(*msg.ColHiRed, msg.TxtFail, ".", true)
-		} else {
-			msg.StatOut(*msg.ColHiGreen, msg.TxtSuccess, ".", true)
-		}
 	}
 
 	return nil

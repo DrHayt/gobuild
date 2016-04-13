@@ -36,14 +36,15 @@ func New(curLst []configuration.PackageStruct) (pb PackageBuild) {
 }
 
 func (p *PackageBuild) getCurrePackageList() error {
+
+	p.TestList[""] = 100
 	files, err := ioutil.ReadDir("./packages")
 	if err != nil {
-		return err
+		return nil
 	}
 	for _, file := range files {
 		p.TestList[fmt.Sprint("packages/", file.Name())] = 100
 	}
-	p.TestList[""] = 100
 	return nil
 }
 
